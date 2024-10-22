@@ -55,3 +55,23 @@ Goals:
     - User should be able to see the total price of the purchase
     - User should be able to see the remaining balance of the card
 """)
+
+fruits = st.multiselect("Select fruits", list(DICTIONARY.keys()))
+card = st.selectbox("Select a card", list(CARDS.keys()))
+
+for fruit in fruits:
+    quantity = st.number_input(f"Enter quantity for {fruit}", min_value=0, max_value=DICTIONARY[fruit]["quantity"])
+    total_price = quantity * DICTIONARY[fruit]["price"]
+    st.write(f"Total price for {quantity} {fruit} is {total_price}")
+
+    CARDS[card]["balance"] -= total_price
+    st.write(f"Remaining balance for {card} is {CARDS[card]['balance']}")
+
+    if CARDS[card]["balance"] < 0:
+        st.error("You are broke, home")
+        break
+    else:
+        st.success("Pleasure doing business with you")
+
+st.write("Thank you for shopping with us!")
+
