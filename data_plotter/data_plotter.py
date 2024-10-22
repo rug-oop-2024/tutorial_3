@@ -14,7 +14,7 @@ class DataPlotter:
         ) -> None:
         self._data = data
 
-    def hist_1d(self, variable: str, **kwargs) -> None:
+    def hist_1d(self, variable: str, **kwargs) -> plt.Figure:
         '''
         Plots a 1D histogram of the dataset for the given variable
 
@@ -35,8 +35,9 @@ class DataPlotter:
         plt.ylabel("Frequency")
         plt.title(f"{variable} histogram")
         plt.show()
+        return plt.gcf()
 
-    def scatter_2d(self, x_variable: str, y_variable: str, **kwargs) -> None:
+    def scatter_2d(self, x_variable: str, y_variable: str, **kwargs) -> plt.Figure:
         '''
         Plots a 2D scatter plot of the dataset for the given
         x and y variables.
@@ -56,8 +57,10 @@ class DataPlotter:
         plt.ylabel(y_variable)
         plt.title(f"{x_variable} vs {y_variable}")
         plt.show()
+        return plt.gcf()
+
     
-    def scatter_3d(self, x_variable: str, y_variable: str, z_variable: str, **kwargs) -> None:
+    def scatter_3d(self, x_variable: str, y_variable: str, z_variable: str, **kwargs) -> plt.Figure:
         '''
         Plots a 3D scatter plot of the dataset for the given
         x, y and z variables.
@@ -82,3 +85,4 @@ class DataPlotter:
         ax.set_zlabel(z_variable)
         plt.title(f"{x_variable} vs {y_variable} vs {z_variable}")
         plt.show()
+        return fig
