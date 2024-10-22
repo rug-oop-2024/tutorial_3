@@ -11,3 +11,11 @@ Tasks:
 - Use selectbox to select a dataset
 - Import the library and based on the number of columns selected, plot the data accordinly from the plotter.
 """)
+
+st.code(
+"""
+from glob import glob
+glob("**/*.csv", recursive=True)
+['trial_data/iris.csv']
+"""
+)
