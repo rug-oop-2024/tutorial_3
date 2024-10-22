@@ -70,6 +70,45 @@ def app():
     # Display the plot in Streamlit
     st.pyplot(fig)
 
+    # Now for a black hole
+    # Black Hole Simulation
+    st.markdown('## Black Hole Simulation')
+
+    # Create a grid for black hole simulation
+    # Constants
+    G = 6.67430e-11  # gravitational constant in m^3 kg^-1 s^-2
+    c = 299792458     # speed of light in m/s
+    M = 10 * 1.989e30  # mass of the black hole (10 solar masses)
+    r = np.linspace(0.1, 15, 400)  # Avoid division by zero
+    theta = np.linspace(0, 2 * np.pi, 400)
+    R, Theta = np.meshgrid(r, theta)
+
+    # Calculate the gravitational potential around a black hole (realistic)
+    V = -G * M / (R * c**2)  # Gravitational potential per unit mass
+
+    # Convert polar coordinates to Cartesian coordinates for 3D plotting
+    X_bh = R * np.cos(Theta)
+    Y_bh = R * np.sin(Theta)
+
+    # Create a 3D surface plot for the black hole gravitational potential
+    fig_bh = plt.figure(figsize=(10, 8))
+    ax_bh = fig_bh.add_subplot(111, projection='3d')
+
+    # Plotting the surface
+    surface_bh = ax_bh.plot_surface(X_bh, Y_bh, V, cmap='inferno', edgecolor='none')
+
+    # Adding labels and title
+    ax_bh.set_title('Gravitational Potential around a Black Hole', fontsize=12)
+    ax_bh.set_xlabel('X-axis')
+    ax_bh.set_ylabel('Y-axis')
+    ax_bh.set_zlabel('Gravitational Potential')
+
+    # Add color bar for scale
+    fig_bh.colorbar(surface_bh, ax=ax_bh, shrink=0.5, aspect=5, label='Potential (simulated)')
+
+    # Display the black hole simulation plot in Streamlit
+    st.pyplot(fig_bh)
+
 
 app()
   
